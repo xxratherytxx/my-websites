@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shimla Hill Station</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Styling for the Sign Up / Login Menu */
+    #menu-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #4CAF50;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #menu-container a {
+      color: white;
+      font-size: 24px;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px;
+      background-color: #333;
+      transition: background-color 0.3s;
+    }
+
+    #menu-container a:hover {
+      background-color: #45a049;
+    }
+
+    /* Styling for the login/signup page */
+    .form-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .form-group input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .form-footer {
+      margin-top: 20px;
+    }
+
+    .form-footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    /* Styling for the main Shimla page */
+    #main-content {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    /* Menu styles */
+    #menu {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      background-color: #333;
+      transition: 0.3s;
+      padding-top: 20px;
+    }
+
+    #menu a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    #menu a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    #menu .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      font-size: 36px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #menu.open {
+      left: 0;
+    }
+
+    #menu-btn {
+      cursor: pointer;
+      font-size: 28px;
+      color: #4CAF50;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sign Up / Login Menu (Main Landing Page) -->
+<div id="menu-container">
+  <a href="javascript:void(0)" onclick="showLoginPage()">Login</a>
+  <a href="javascript:void(0)" onclick="showSignupPage()">Sign Up</a>
+</div>
+
+<!-- Login and Sign-Up Forms -->
+<div id="form-container" class="form-container" style="display:none;">
+  <h2>Login or Sign Up</h2>
+
+  <!-- Login Form -->
+  <div id="login-form">
+    <h3>Login</h3>
+    <form id="loginForm" action="javascript:void(0)">
+      <div class="form-group">
+        <input type="text" id="login-username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="login-password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p class="error" id="login-error"></p>
+    </form>
+    <div class="form-footer">
+      <p>Don't have an account? <a href="javascript:void(0)" onclick="showSignupPage()">Sign Up</a></p>
+    </div>
+  </div>
+
+  <!-- Sign-Up Form -->
+  <div id="signup-form" style="display:none;">
+    <h3>Sign Up</h3>
+    <form id="signupForm" action="javascript:void(0)">
+      <div class="form-group">
+        <input type="text" id="signup-username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="signup-password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+    <div class="form-footer">
+      <p>Already have an account? <a href="javascript:void(0)" onclick="showLoginPage()">Login</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content (Shimla Page) -->
+<div id="main-content">
+  <h1>Welcome to Shimla Hill Station</h1>
+  <p>Shimla, the capital of Himachal Pradesh, is a charming hill station known for its colonial architecture, pleasant climate, and scenic beauty. Whether you're looking for a peaceful retreat or an adventurous getaway, Shimla has something for everyone.</p>
+  <p>Located in the northern part of India, Shimla is nestled in the majestic Himalayas, offering panoramic views of snow-capped peaks and lush green valleys. Its cool climate attracts tourists throughout the year, especially during the summer and winter months.</p>
+
+  <h2>Major Attractions in Shimla:</h2>
+  <ul>
+    <li><strong>The Ridge:</strong> A popular open space in the heart of Shimla, known for its spectacular views of the surrounding mountains.</li>
+    <li><strong>Jakhoo Temple:</strong> Dedicated to Lord Hanuman, this temple sits atop the Jakhoo Hill, offering breathtaking views of the town.</li>
+    <li><strong>Kufri:</strong> A popular destination for skiing, snowboarding, and other winter sports, Kufri is located just a few kilometers from Shimla.</li>
+    <li><strong>Christ Church:</strong> A beautiful colonial-era church known for its architectural grandeur and stained-glass windows.</li>
+    <li><strong>Shimla Mall Road:</strong> A vibrant shopping street filled with local shops, cafes, and restaurants offering a glimpse of Shimla's colonial heritage.</li>
+    <li><strong>Summer Hill:</strong> A peaceful hilltop offering panoramic views of Shimla and its surrounding areas.</li>
+  </ul>
+
+  <h2>Shopping in Shimla:</h2>
+  <p>Shimla is known for its traditional handicrafts, woolen garments, and souvenirs. Mall Road is the best place to shop for these items, where you'll find everything from handmade woolen shawls and caps to wooden artifacts and jewelry.</p>
+
+  <!-- Menu Button -->
+  <span id="menu-btn" onclick="toggleMenu()">&#9776; Menu</span>
+
+  <!-- Side Menu -->
+  <div id="menu">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+    <a href="javascript:void(0)" onclick="alert('Back option clicked')">Back</a>
+    <a href="javascript:void(0)">Attractions</a>
+    <a href="javascript:void(0)">Restaurants</a>
+    <a href="javascript:void(0)" onclick="showWeather()">Weather</a>
+    <a href="javascript:void(0)">Shopping</a>
+  </div>
+
+  <!-- Weather Information -->
+  <div id="weather-info" style="display:none;">
+    <h2>Weather in Shimla</h2>
+    <p>Shimla experiences a temperate climate throughout the year, with each season bringing a unique charm.</p>
+    <h3>Summer (March to June):</h3>
+    <p>Summers in Shimla are mild and pleasant, with daytime temperatures ranging from 15°C to 30°C. It is the perfect time to visit for those looking to escape the heat of the plains. The cool evenings make it a refreshing destination.</p>
+
+    <h3>Monsoon (July to September):</h3>
+    <p>Shimla experiences moderate to heavy rainfall during the monsoon season. It is advisable to avoid traveling to Shimla during this period as the roads may become slippery, and landslides can occur.</p>
+
+    <h3>Winter (December to February):</h3>
+    <p>Winters in Shimla are cold, with temperatures often dropping below freezing point. The region receives heavy snowfall during this time, making it a haven for winter sports enthusiasts. Skiing, snowboarding, and ice-skating are popular activities during the winter months.</p>
+
+    <h3>Best Time to Visit:</h3>
+    <p>The best time to visit Shimla is from March to June for a pleasant summer vacation or from December to February for a winter wonderland experience with snowfall.</p>
+  </div>
+
+</div>
+
+<script>
+  // Show Login Form
+  function showLoginPage() {
+    document.getElementById('menu-container').style.display = 'none'; // Hide main menu
+    document.getElementById('form-container').style.display = 'block'; // Show login page
+  }
+
+  // Show Sign-Up Form
+  function showSignupPage() {
+    document.getElementById('menu-container').style.display = 'none'; // Hide main menu
+    document.getElementById('form-container').style.display = 'block'; // Show sign-up page
+    document.getElementById('signup-form').style.display = 'block'; // Show sign-up form
+    document.getElementById('login-form').style.display = 'none'; // Hide login form
+  }
+
+  // Validate login credentials using localStorage
+  document.getElementById("loginForm").onsubmit = function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+    const errorElement = document.getElementById('login-error');
+
+    // Retrieve stored user credentials from localStorage
+    const storedUser = JSON.parse(localStorage.getItem(username));
+
+    // Check if the username exists and password matches
+    if (storedUser && storedUser.password === password) {
+      localStorage.setItem("loggedInUser", username); // Store login state
+      showMainContent(); // Show main content
+      errorElement.innerHTML = ''; // Clear error message
+    } else {
+      errorElement.innerHTML = 'Invalid username or password. Please try again.';
+    }
+  };
+
+  // Handle user sign-up
+  document.getElementById("signupForm").onsubmit = function(event) {
+    event.preventDefault(); // Prevent form from submitting
+
+    const username = document.getElementById('signup-username').value.trim();
+    const password = document.getElementById('signup-password').value.trim();
+
+    // Check if username already exists
+    if (localStorage.getItem(username)) {
+      alert("Username already exists! Please choose a different one.");
+    } else {
+      // Store the new user data in localStorage
+      localStorage.setItem(username, JSON.stringify({ username: username, password: password }));
+      alert("Sign up successful! You can now log in.");
+      showLoginPage(); // Switch to login form after sign-up
+    }
+  };
+
+  // Show the main content page after login
+  function showMainContent() {
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  }
+
+  // Toggle the side menu
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("open");
+  }
+
+  // Close the side menu
+  function closeMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.remove("open");
+  }
+
+  // Show the weather info section
+  function showWeather() {
+    document.getElementById('weather-info').style.display = 'block'; // Show weather info
+    document.getElementById('main-content').style.display = 'none'; // Hide main content
+  }
+
+</script>
+</body>
+</html>
